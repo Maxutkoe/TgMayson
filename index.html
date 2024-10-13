@@ -13,19 +13,21 @@
         }
         </style>
 
-        <script>
-            let tg = window.Telegram.WebApp;
-            let buy = document.getElementById("order")
-
-            buy.addEventListener("click", () => {
-                document.getElementById("name").value = tg.initDataUnsafe.user.first_name;
-            });
-        </script>
+        
     </head>
     <body>
     <input type="text" name="Name" id="name" placeholder="Имя">
     <button type="submit" id="order">Купить</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+            let tg = window.Telegram.WebApp;
+            let buy = document.getElementById("order")
+
+            buy.addEventListener("click", () => {
+                document.getElementById("name").value = tg.initDataUnsafe.user.first_name;
+                console.log("FFF")
+            });
+        </script>
     </body>
 </html>
