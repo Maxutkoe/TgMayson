@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+        body{
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+        }
+        </style>
+
+        <script>
+            let tg = window.Telegram.WebApp;
+            let buy = document.getElementById("order")
+
+            buy.addEventListener("click", () => {
+                document.getElementById("name").value = tg.initDataUnsafe.first_name;
+            });
+        </script>
+    </head>
+    <body>
+    <input type="text" name="Name" id="name" placeholder="Имя">
+    <button type="submit" id="order">Купить</button>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    </body>
+</html>
