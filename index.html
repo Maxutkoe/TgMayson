@@ -28,14 +28,14 @@
             tg.expand();
 
             buy.addEventListener("click", () => {
-                let name = document.getElementById("name");
-                let number = document.getElementById("number");
-                let id = document.getElementById("id");
+                let name = document.getElementById("name").value;
+                let number = document.getElementById("number").value;
+                let id = document.getElementById("id").value;
 
                 let data = {
-                    name: name.value,
-                    number: number.value,
-                    id: id.value
+                    name: name,
+                    number: number,
+                    id: id
                 }
 
                 tg.sendData(JSON.stringify(data));
