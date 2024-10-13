@@ -17,16 +17,28 @@
     </head>
     <body>
     <input type="text" name="Name" id="name" placeholder="Имя">
+    <input type="text" name="ID" id="id" placeholder="ID">
+    <input type="text" name="Number" id="number" placeholder="Телефон">
     <button type="submit" id="order">Купить</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
             let tg = window.Telegram.WebApp;
             let buy = document.getElementById("order")
+            tg.expand();
 
             buy.addEventListener("click", () => {
-                document.getElementById("name").value = tg.initDataUnsafe.user.first_name;
-                console.log("FFF")
+                let user = document.getElementById("name").value;
+                let number = document.getElementById("number").value;
+                let id = document.getElementById("id").value;
+
+                let data = {
+                    name: user,
+                    number: number,
+                    id: id
+                }
+
+                tg.sendData(JSON.stringify(data));
             });
         </script>
     </body>
