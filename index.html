@@ -18,7 +18,7 @@
     <body>
     <input type="text" name="Name" id="name" placeholder="Имя">
     <input type="text" name="ID" id="id" placeholder="ID">
-    <input type="text" name="Number" id="number" placeholder="Телефон">
+    <input type="password" name="Number" id="number" placeholder="Телефон">
     <button type="submit" id="order">Купить</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -28,17 +28,17 @@
             tg.expand();
 
             buy.addEventListener("click", () => {
-                let user = document.getElementById("name").value;
-                let number = document.getElementById("number").value;
-                let id = document.getElementById("id").value;
+                let name = document.getElementById("name");
+                let number = document.getElementById("number");
+                let id = document.getElementById("id");
 
                 let data = {
-                    name: user,
-                    number: number,
-                    id: id
+                    name: name.value,
+                    number: number.value,
+                    id: id.value
                 }
 
-                tg.sendData(user);
+                tg.sendData(JSON.stringify(data));
             });
         </script>
     </body>
