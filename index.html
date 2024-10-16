@@ -13,17 +13,19 @@
         <style>
         body{
             color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
+            /*background: var(--tg-theme-bg-color);*/
+            background: #100001;
             display: grid;
             place-content: center;
             overflow-x: hidden;
+            
         }
         #tgposts {
         position: absolute;
         top: 10%;
         width: 99%;
         height: 90%;
-        overflow-y: scroll; /* Включаем вертикальную прокрутку */
+        overflow-y: scroll; 
         }
         #tgposts::-webkit-scrollbar {
   width: 10px;
@@ -80,8 +82,8 @@ header {
   height: 50px;
   top: 0;
   left: 0;
-  background: linear-gradient(to bottom right, #110e0c, #694c7c, #097f92);
-  border-bottom: 3px solid #694c7c;
+  background: linear-gradient(to bottom right, #0428B3, #7623EF, #F500CC);
+  border-bottom: 1px solid #000000;
   -webkit-transition: height 0.3s;
   
   .container {
@@ -143,14 +145,14 @@ header.minimized {
 <style>
 .navbar {
   overflow: hidden;
-  padding: 5px;
-  margin: 0px;
-  background: linear-gradient(to bottom right, #0E1C5A, #155473, #F02F52);
+  padding: 7px;
+  margin: 10px;
+  background: linear-gradient(to bottom right, #652ae2, #e22aa6);
   border-radius: 12px;
   position: fixed;
   bottom: 1%;
-  left: 5%;
-  width: 90%;
+  left: 35%;
+  width: 30%;
   align: center;
 }
 
@@ -165,6 +167,7 @@ header.minimized {
   width: 25%;
   text-decoration: none;
   font-size: 17px;
+  height: 10px;
 }
 
 .navbar a:hover {
@@ -199,8 +202,8 @@ header.minimized {
   cursor: pointer;
   display: inline-block;
   font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 10px;
-  font-weight: 200;
+  font-size: 6px;
+  font-weight: 100;
   line-height: normal;
   margin: 0;
   min-height: 60px;
@@ -213,8 +216,8 @@ header.minimized {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  height: 20px;
-  width: 25%;
+  height: 10px;
+  width: 15%;
   will-change: transform;
 }
 
@@ -233,15 +236,20 @@ header.minimized {
   box-shadow: none;
   transform: translateY(0);
 }
+
+/*pyscript.write('today', dt.date.today().strftime('%A %B %d, %Y'))*/
 </style>
 
-        
+    <py-env>
+    - bs4
+    - requests
+    - pyodide.ffi
+</py-env>
     </head>
     <body>
     <header>
   <div class="container">
-    <h1>Мейсон</h1>
-    
+    <h1 id="today">Мейсон</h1>
     <!--<button type="submit" id="order" onclick="trans()" style="position: absolute; top: 8%; right: 20%;">1 TON | Donate</button>
    --> <div id="ton-connect" style="position: absolute; top: 10%; right: 2%; display:inline;">
     </div>
@@ -263,7 +271,7 @@ header.minimized {
 <div class="navbar">
 <button class="button-28" role="button">Settings</button>
 <button class="button-28" role="button">Home</button>
-<button class="button-28" role="button">Profile</button>
+<button class="button-28" role="button" onclick="test()">Profile</button>
 <button class="button-28" role="button" onclick="trans()">Test</button>
 
 </div>
@@ -325,6 +333,18 @@ header.minimized {
                 catch(e){
                     console.error(e);
                 }
+    }
+
+    async function test(){
+        const currentWallet = tonConnectUI.wallet;
+        const currentWalletInfo = tonConnectUI.walletInfo;
+        const currentAccount = tonConnectUI.account;
+        const currentIsConnectedStatus = tonConnectUI.connected;
+
+        console.log(currentWallet);
+        console.log(currentAccount);
+        console.log(currentIsConnectedStatus);
+        console.log(currentWalletInfo);
     }
 
     // Call the function
