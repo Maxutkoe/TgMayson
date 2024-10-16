@@ -66,11 +66,92 @@
 #order:not([disabled]):hover {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
+
+
+@import "compass/css3";
+header {
+  font-family: sans-serif;
+  position: fixed;
+  width: 100%;
+  height: 150px;
+  top: 0;
+  left: 0;
+  background-color: rgba(22,22,22,0.4);
+  border-bottom: 3px solid rgba(0,0,0,0.4);
+  -webkit-transition: height 0.3s;
+  
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  
+  h1, nav {
+    display: inline-block;
+    position: relative;
+    line-height: 150px;
+    -webkit-transition: all 0.3s;
+  }
+  
+  a {       
+    text-decoration: none;
+    color: #ccc;
+  }
+  
+  nav {
+    float: right;
+    line-height: 150px;
+    font-size: 1.4em;
+    a {
+      margin-left: 10px;
+    }
+    
+    a:hover{
+      border-top: 2px white;
+      border-bottom: 2px white;
+    }
+  }
+  
+}
+
+header.minimized {
+  height: 60px;
+  
+  h1,nav {
+    line-height: 60px;
+  }
+  nav {
+    font-size: 1.2em;
+  }
+  h1{
+    font-size: 1.7em;
+  }
+  
+}
+
+.container {
+  height: 2000px; 
+}
         </style>
 
         
     </head>
     <body>
+    <header>
+  <div class="container">
+    <h1><a href="/">Mayson</a></h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Blog</a>
+    </nav>
+  </div>
+</header>
+
+
     <button type="submit" id="order" onclick="trans()" style="position: absolute; top: 8%; right: 2%;">1 TON | Donate</button>
     <div id="ton-connect" style="position: absolute; top: 2%; right: 2%;">
     </div>
@@ -107,6 +188,21 @@
     };
 </script>
 <script>
+    $(function(){
+  var header = $("header"),
+      yOffset = 0,
+      triggerPoint = 150;
+  $(window).scroll(function(){
+    yOffset = $(window).scrollTop();
+    
+    if(yOffset >= triggerPoint){
+      header.addClass("minimized");
+    }else{
+      header.removeClass("minimized");
+    }
+    
+  });
+});
     async function connectToWallet() {
         const connectedWallet = await tonConnectUI.connectWallet();
         // Do something with connectedWallet if needed
