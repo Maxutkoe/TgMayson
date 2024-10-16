@@ -9,19 +9,81 @@
         <style>
         body{
             color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
+            /*background: var(--tg-theme-bg-color);*/
+            background: #000000;
         }
+        #tgposts {
+        position: absolute;
+        top: 100px;
+        right: 950px;
+        height: 90%; /* Высота блока */
+        width: 700px;
+        overflow-y: scroll; /* Включаем вертикальную прокрутку */
+        }
+        #tgposts::-webkit-scrollbar {
+  width: 10px;
+}
+
+#tgposts::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+#tgposts::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #694c7c, #097f92);
+}
+
+#order {
+  background: linear-gradient(to bottom right, #110e0c, #694c7c, #097f92);
+  width: 150px;
+  border: 0;
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+#order:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+#order:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
         </style>
 
         
     </head>
     <body>
-    <input type="text" name="Name" id="name" placeholder="Имя">
-    <input type="text" name="ID" id="id" placeholder="ID">
-    <input type="password" name="Number" id="number" placeholder="Телефон">
-    <button type="submit" id="order">Купить</button>
-    <div id="ton-connect">
-    <button id="tconect">Подключить кошелек</button>
+    <button type="submit" id="order" onclick="trans()" style="position: absolute; top: 6%; right: 2%;">1 TON | Donate</button>
+    <div id="ton-connect" style="position: absolute; top: 2%; right: 2%;">
+    </div>
+
+    <div width="100" id="tgposts">
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/22" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/17" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/20" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/15" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/14" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/13" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/12" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/26" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
+    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="lMaysonl/27" data-width="100%" data-userpic="false" data-color="343638" data-dark="1" data-dark-color="FFFFFF"></script>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -29,39 +91,45 @@
             let tg = window.Telegram.WebApp;
             let buy = document.getElementById("order")
             tg.expand();
-
-            buy.addEventListener("click", () => {
-                let name = document.getElementById("name").value;
-                let number = document.getElementById("number").value;
-                let id = document.getElementById("id").value;
-
-                let data = {
-                    name: name,
-                    number: number,
-                    id: id
-                }
-
-                tg.sendData(JSON.stringify(data));
-            });
         </script>
         <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+        <script src="https://unpkg.com/@tonconnect/sdk@0.0.34/dist/tonconnect-sdk.min.js"></script>
         <script>
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://raw.githubusercontent.com/Maxutkoe/TgMayson/main/ton-manifest/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
+
+    tonConnectUI.uiOptions = {
+      twaReturnUrl: 'https://t.me/lMaysonlBot'
+    };
 </script>
 <script>
-
-    let tonconect = document.getElementById("tconect")
-
-    tconect.addEventListener("click", () => {
-        async function connectToWallet() {
+    async function connectToWallet() {
         const connectedWallet = await tonConnectUI.connectWallet();
         // Do something with connectedWallet if needed
         console.log(connectedWallet);
     }
-    }) 
+
+    async function trans(){
+                const transaction = {
+                    validUntil: Math.round(Date.now() / 1000) + 10,
+                    messages: [
+                        {
+                            address: "0:0000000000000000000000000000000000000000000000000000000000000000",
+                            amount: "1000000"
+                        }
+                    ]
+                };
+
+                try{
+                    await tonConnectUI.sendTransaction(transaction);
+                    
+                }
+                catch(e){
+                    console.error(e);
+                }
+    }
 
     // Call the function
     connectToWallet().catch(error => {
