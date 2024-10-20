@@ -267,8 +267,8 @@ header.minimized {
 <div class="navbar">
 <button class="button-28" role="button" onclick="settings()">Настройки</button>
 <button class="button-28" role="button" onclick="profile()">Домой</button>
-<button class="button-28" role="button" onclick="test()">Профиль</button>
-<button class="button-28" role="button" onclick="trans()">Тест</button>
+<button class="button-28" role="button" onclick="crypto()">Профиль</button>
+<button class="button-28" role="button" onclick="test()">Тест</button>
 
 </div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -288,8 +288,7 @@ header.minimized {
     tonConnectUI.uiOptions = {
       twaReturnUrl: 'https://t.me/lMaysonlBot'
     };
-</script>
-<script>
+
     $(function(){
   var header = $("header"),
       yOffset = 0,
@@ -345,6 +344,40 @@ header.minimized {
     connectToWallet().catch(error => {
         console.error("Error connecting to wallet:", error);
     });
+    async function rrr(){
+      // const url = new URL("https://tonviewer.com/UQANL1PP96rxkyGZfo-pgGd6m3tBdpwlz9EFR2scmW7xQaKd?section=tokens");
+      // alert(url.search.section)
+      // alert(url.searchParams.get('section'));
+      const resp = await fetch('https://tonapi.io/v2/rates?tokens=ton&currencies=ton%2Cusd%2Crub');
+      const data = await resp.json();
+      console.log(data.rates.TON.prices.RUB);
+    }
+    async function crypto(){
+      const currentWallet = tonConnectUI.wallet.account.address;
+      const tvaccurl = await fetch(`https://tonapi.io/v2/accounts/${ currentWallet }`);
+      const tvjeturl = await fetch("https://tonapi.io/v2/accounts/UQANL1PP96rxkyGZfo-pgGd6m3tBdpwlz9EFR2scmW7xQaKd/jettons");
+      const tvnfturl = await fetch("https://tonapi.io/v2/accounts/UQANL1PP96rxkyGZfo-pgGd6m3tBdpwlz9EFR2scmW7xQaKd/nfts");
+      
+      const wallet = await tvaccurl.json();
+      const jettons = await tvjeturl.json();
+      const nfts = await tvnfturl.json();
+
+      const balance = wallet.balance / 1000000000
+      const truncateToTwo = num => Math.floor(num * 100) / 100;
+      const truncateToThree = num => Math.floor(num * 1000) / 1000;
+
+      console.log(truncateToThree(balance) + " TON");
+      console.log(JSON.stringify(jettons));
+      for(i in jettons.balances){
+        console.log(JSON.stringify(jettons.balances[i].jetton.name) + " " + JSON.stringify(truncateToTwo(jettons.balances[i].balance / 1000000000)) + " ≈ " + JSON.stringify(truncateToTwo(jettons.balances[i].balance / 1000000000)));
+      }
+      console.log("-------------------");
+      console.log(nfts);
+      // for(i in jettons.balances){
+        // console.log(JSON.stringify(jettons.balances[i].jetton.name) + " " + JSON.stringify(truncateToTwo(jettons.balances[i].balance / 1000000000)) + " ≈ " + JSON.stringify(truncateToTwo(jettons.balances[i].balance / 1000000000)));
+      // }
+    }
+      
 </script>
     </body>
 </html>
